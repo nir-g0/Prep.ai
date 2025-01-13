@@ -1,3 +1,4 @@
 .env
 ml-service/venv
 backend/node_modules
+backend/test.js
