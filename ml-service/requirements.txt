@@ -1,0 +1,7 @@
+numpy<2.1,>=1.22
+pandas
+spaCy
+PyPDF2
+docx
+jsonify
+flask
