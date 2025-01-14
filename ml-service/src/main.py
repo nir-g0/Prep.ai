@@ -4,11 +4,10 @@ from PyPDF2 import PdfReader
 import re
 import spacy
 import pandas as pd
-from flask import Flask
+from flask import Flask, request
 
 # File path for the resume
 resume_path = '../data/resume/resume.pdf'
-listing_path = '../data/resume/listing.pdf'
 
 # Load spaCy model
 nlp = spacy.load('en_core_web_sm')
@@ -64,8 +63,9 @@ def extract_skills(text):
     found_skills = [skill for skill in skills_list if skill.lower() in text.lower()]
     return list(set(found_skills))
 
-def parse_resume(file_path):
+def parse_resume():
     # Ensure the file exists
+    file_path = 'uploaded.pdf'
     if not os.path.exists(file_path):
         return json.dumps({'error': f'File not found: {file_path}'})
         # Extract and process text
@@ -81,16 +81,20 @@ def parse_resume(file_path):
         'skills': combined_skills,
         'projects': entities['projects'],
         'degrees': [
-            deg for deg in entities['degrees'] if "university" in deg.lower() or "bachelor" in deg.lower() or "master" in deg.lower()
+            deg for deg in entities['degrees'] if "university" in deg.lower() or "college" in deg.lower() or "bachelor" in deg.lower() or "master" in deg.lower()
         ],  # Filter valid degrees
     }, indent=4)
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def initiate_parsing():
-    result = json.loads(parse_resume(resume_path))
-    return result
+    with open('uploaded.pdf', 'wb') as f:
+            f.write(request.data)  # Access binary data from the request
+            result = json.loads(parse_resume())
+            os.remove('uploaded.pdf')
+            return result
+    return 'Error'
 
 if __name__ == "__main__":
     app.run(port='8080', debug=True)

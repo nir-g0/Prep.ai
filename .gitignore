@@ -1,5 +1,7 @@
 .env
 ml-service/venv
 ml-service/data
+backend/data
 backend/node_modules
 backend/test.js
+backend/uploads
