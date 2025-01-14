@@ -87,14 +87,14 @@ def parse_resume():
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def initiate_parsing():
+
     with open('uploaded.pdf', 'wb') as f:
-            f.write(request.data)  # Access binary data from the request
-            result = json.loads(parse_resume())
-            os.remove('uploaded.pdf')
-            return result
-    return 'Error'
+        f.write(request.data)  # Access binary data from the request
+        result = json.loads(parse_resume())
+        os.remove('uploaded.pdf')
+    return result
 
 if __name__ == "__main__":
     app.run(port='8080', debug=True)

@@ -6,6 +6,7 @@ const app = express() // Create an express app
 const port = 3000 // Define the port number
 
 let user = { length: 0, users: {} }
+let parsed_resume = {}
 // Handle GET requests to "/"
 app.get('/', (req, res) => {
   const { name } = req.query // Extract "name" from the query parameters
@@ -19,8 +20,12 @@ app.get('/', (req, res) => {
 const upload = multer({
   dest: 'uploads/',
   limits: {
-    fileSize: 5 * 1024 * 1024 // 5 MB limit
+    fileSize: 5242880 // 5 MB limit
   }
+})
+
+app.get('/parser_response', async (req, res) => {
+  res.json(parsed_resume)
 })
 
 app.post('/parser', upload.single('pdf'), async (req, res) => {
@@ -32,9 +37,13 @@ app.post('/parser', upload.single('pdf'), async (req, res) => {
         'Content-Type': 'application/pdf'
       }
     })
+    parsed_resume = response.data
     res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response?.data || error.message)
+  } finally {
+    fs.rmSync('uploads', { recursive: true, force: true })
+    fs.mkdirSync('uploads')
   }
 })
 
