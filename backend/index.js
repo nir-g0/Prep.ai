@@ -1,13 +1,17 @@
 const express = require('express') // Import express
-const axios = require('axios') // Import axios
-const fs = require('fs')
 const multer = require('multer')
-const app = express() // Create an express app
-const port = 3000 // Define the port number
+const { default: parseResume } = require('./src/routes/parser')
+const {
+  AddUser: AddUser,
+  AuthUser: AuthUser,
+  DelUser: DelUser
+} = require('./src/database/auth.js')
+
+const app = express()
+app.use(express.json())
 
 let user = { length: 0, users: {} }
-let parsed_resume = {}
-// Handle GET requests to "/"
+
 app.get('/', (req, res) => {
   const { name } = req.query // Extract "name" from the query parameters
   if (name) {
@@ -20,34 +24,50 @@ app.get('/', (req, res) => {
 const upload = multer({
   dest: 'uploads/',
   limits: {
-    fileSize: 5242880 // 5 MB limit
+    fileSize: 5242880
   }
 })
 
-app.get('/parser_response', async (req, res) => {
-  res.json(parsed_resume)
+app.post('/add-user', async (req, res) => {
+  try {
+    const { email, password } = req.body
+    const response = await AddUser(email, password)
+    res.send(response)
+  } catch (error) {
+    console.error('Error:', error.response?.data || error.message)
+  }
+})
+
+app.post('/auth-user', async (req, res) => {
+  try {
+    const { email, password } = req.body
+    const response = await AuthUser(email, password)
+    res.send(response)
+  } catch (error) {
+    console.error('Error:', error.response?.data || error.message)
+  }
+})
+
+app.post('/del-user', async (req, res) => {
+  try {
+    const { email } = req.body
+    const response = await DelUser(email)
+    res.send(response)
+  } catch (error) {
+    console.error('Error:', error.response?.data || error.message)
+  }
 })
 
 app.post('/parser', upload.single('pdf'), async (req, res) => {
   try {
-    let pythonServerUrl = 'http://127.0.0.1:8080/'
-    const fileStream = fs.createReadStream(req.file.path)
-    const response = await axios.post(pythonServerUrl, fileStream, {
-      headers: {
-        'Content-Type': 'application/pdf'
-      }
-    })
-    parsed_resume = response.data
+    const response = await parseResume(req)
     res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response?.data || error.message)
-  } finally {
-    fs.rmSync('uploads', { recursive: true, force: true })
-    fs.mkdirSync('uploads')
   }
 })
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Now listening on port ${port}`)
+const PORT = 3000
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
 })
