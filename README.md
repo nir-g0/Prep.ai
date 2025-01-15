@@ -4,24 +4,18 @@ Prep.ai is a web-based application designed to help job seekers prepare for tech
 
 The platform uses advanced AI, including Large Language Models (LLMs), to simulate realistic interview scenarios, generate tailored questions, and provide actionable feedback on responses. Users can practice behavioral and situational questions while receiving real-time improvement tips based on their performance. Additional features include progress tracking, resume-based question customization, and speech analysis for verbal responses.
 
-### Server
+### Running the current Version (Tested on MacOS only)
 
-#### Install dependencies
-
-```
-npm install --save-dev
-```
-
-###### Check config.yaml, ensure port is open
-
-#### Enable server
+#### Install all dependencies and environments
 
 ```
-node index.js
+./init.cmd
 ```
 
-###### or if you are debugging
+###### This will also run all necessary services
+
+#### Running all services
 
 ```
-nodemon index.js
+./run.cmd
 ```
