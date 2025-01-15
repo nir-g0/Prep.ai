@@ -1,4 +1,4 @@
-.env
+backend/src/.env
 ml-service/venv
 ml-service/data
 backend/data
