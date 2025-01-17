@@ -63,7 +63,7 @@ const AuthenticateUser = async (email, password) => {
 
     const hashed_password = res.rows[0].hashed_password
     const isValid = await argon2.verify(hashed_password, password)
-    return !isValid
+    return isValid
   } catch (err) {
     console.error('Error authenticating user:', err)
     return false

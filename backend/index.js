@@ -6,8 +6,16 @@ const {
   AuthUser: AuthUser,
   DelUser: DelUser
 } = require('./src/database/auth.js')
+const cors = require('cors')
 
 const app = express()
+app.use(
+  cors({
+    origin: 'http://localhost:3001', // Allow only your frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    credentials: true // If you're using cookies
+  })
+)
 app.use(express.json())
 
 let user = { length: 0, users: {} }

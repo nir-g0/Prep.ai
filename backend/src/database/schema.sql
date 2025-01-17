@@ -21,6 +21,7 @@ CREATE TABLE Sessions (
     user_id INT NOT NULL,
     resume_id INT,
     position_type VARCHAR(255) NOT NULL,
+    session_data JSONB,
     score INT,
     session_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(id),
