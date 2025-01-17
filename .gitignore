@@ -1,4 +1,3 @@
-backend/src/database/.env
 ml-service/venv
 ml-service/data
 backend/data
@@ -8,3 +7,4 @@ backend/uploads
 .DS_Store
 ml-service/.DS_Store
 backend/src/routes/.env
+backend/src/database/.env
