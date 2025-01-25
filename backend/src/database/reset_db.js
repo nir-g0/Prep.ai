@@ -8,7 +8,10 @@ const client = new Client({
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: 'prepai'
+  database: 'prepai',
+  ssl: {
+    rejectUnauthorized: false // Disable strict certificate checking for testing
+  }
 })
 
 client

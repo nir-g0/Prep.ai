@@ -17,7 +17,11 @@ skills_list = pd.read_json('skills.json')['skills']
 
 def extract_text_from_pdf(file_path):
     """Extract text from a PDF file."""
-    reader = PdfReader(file_path)
+    try:
+        reader = PdfReader(file_path)
+    except Exception as e:
+        raise ValueError(f"Error reading PDF file: {str(e)}")
+
     text = ""
     for page in reader.pages:
         text += page.extract_text()
@@ -50,13 +54,13 @@ def extract_entities(text):
     projects = [
         proj for proj in projects if len(proj.split()) > 1 and not proj.lower().startswith("skills")
     ]
-
+    
+    output = {}
+    output['skills'] = list(set(skills))
+    output['projects'] = list(set(projects))
+    output['degrees'] = list(set(degrees))
     # Deduplicate all fields
-    return {
-        'skills': list(set(skills)),
-        'projects': list(set(projects)),
-        'degrees': list(set(degrees)),
-    }
+    return output
 
 def extract_skills(text):
     """Extract predefined skills from the text."""
@@ -89,11 +93,19 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def initiate_parsing():
-
+    if not request.data or len(request.data) == 0:
+        return json.dumps({'error': 'Uploaded file is empty or missing'}), 400
+    
     with open('uploaded.pdf', 'wb') as f:
         f.write(request.data)  # Access binary data from the request
-        result = json.loads(parse_resume())
+
+    # Check if file is empty after writing
+    if os.path.getsize('uploaded.pdf') == 0:
         os.remove('uploaded.pdf')
+        return json.dumps({'error': 'Uploaded file is empty'}), 400
+
+    result = json.loads(parse_resume())
+    os.remove('uploaded.pdf')
     return result
 
 if __name__ == "__main__":

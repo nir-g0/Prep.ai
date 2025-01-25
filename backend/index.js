@@ -1,13 +1,25 @@
 const express = require('express') // Import express
 const multer = require('multer')
-const { default: parseResume } = require('./src/routes/parser')
+const { parseResume: parseResume } = require('./src/routes/parser')
 const {
   AddUser: AddUser,
   AuthUser: AuthUser,
-  DelUser: DelUser
+  DelUser: DelUser,
+  AttachResume: AttachResume,
+  CreateSession: CreateSession,
+  GetSessions,
+  GetSession,
+  DeleteSession,
+  UpdateSession
 } = require('./src/database/auth.js')
-const cors = require('cors')
 
+const {
+  generateQuestions: generateQuestions,
+  generateFeedback: generateFeedback
+} = require('./src/routes/llm.js')
+
+const cors = require('cors')
+const fs = require('fs')
 const app = express()
 app.use(
   cors({
@@ -66,12 +78,107 @@ app.post('/del-user', async (req, res) => {
   }
 })
 
-app.post('/parser', upload.single('pdf'), async (req, res) => {
+app.post('/resume-parse', upload.single('pdf'), async (req, res) => {
   try {
     const response = await parseResume(req)
-    res.json(response.data)
+    const fileName = req.file.filename
+    const headers = req.headers
+
+    const saved_resume = await AttachResume(headers.authorization, fileName)
+    if (saved_resume[1] != null) {
+      fs.unlink(`./uploads/${saved_resume[1]}`, err => {
+        if (err) {
+          console.error('Error deleting file:', err)
+        } else {
+          console.log('File deleted successfully')
+        }
+      })
+    }
+
+    res.json({ data: response.data })
   } catch (error) {
     console.error('Error:', error.response?.data || error.message)
+  }
+})
+
+app.post('/listing-parse', upload.single('pdf'), async (req, res) => {
+  try {
+    const response = await parseResume(req)
+
+    const fileName = req.file.filename
+    fs.unlink(`./uploads/${fileName}`, err => {
+      if (err) {
+        console.error('Error deleting file:', err)
+      } else {
+        console.log('File deleted successfully')
+      }
+    })
+
+    res.json({ data: response.data })
+  } catch (error) {
+    console.error('Error:', error.response?.data || error.message)
+  }
+})
+
+app.post('/create-session', async (req, res) => {
+  try {
+    const { cookie, data } = req.body
+    const response = await CreateSession(cookie, data)
+    res.send(response.data)
+  } catch (error) {
+    console.error('Error:', error.response?.data || error.message)
+  }
+})
+
+app.get('/get-sessions', async (req, res) => {
+  try {
+    const cookie = req.headers.authorization
+    const response = await GetSessions(cookie)
+    res.json(response)
+  } catch (error) {
+    console.error('Error:', error.response?.data || error.message)
+  }
+})
+
+app.post('/delete-session', async (req, res) => {
+  try {
+    const { id, title } = req.body
+    const response = await DeleteSession(id, title)
+    res.send(response)
+  } catch (error) {
+    console.error('Error:', error.response?.data || error.message)
+  }
+})
+
+app.get('/get-session', async (req, res) => {
+  try {
+    const { id, authToken } = req.query
+    const response = await GetSession(id, authToken)
+    res.send(response)
+  } catch (error) {
+    console.error('Error: ', error)
+  }
+})
+
+app.post('/gen-qs', async (req, res) => {
+  try {
+    const { sessionId, query_data, column } = req.body
+    const response = await generateQuestions(query_data)
+    await UpdateSession(sessionId, column, response)
+    console.log(response)
+    res.send(response)
+  } catch (error) {
+    console.error('Error: ', error)
+  }
+})
+
+app.post('/gen-feedback', async (req, res) => {
+  try {
+    const { transcript, question } = req.body
+    const response = await generateFeedback(transcript, question)
+    res.send(response)
+  } catch (error) {
+    console.error('Error: ', error)
   }
 })
 

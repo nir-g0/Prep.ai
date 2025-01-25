@@ -2,38 +2,278 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
 /* Global Body Styling */
 body {
   @apply bg-gray-100 text-gray-800 font-sans;
+  
 }
 
 html, body {
-  padding: 0;
+  background-color: rgb(234, 234, 234);
+  color: black;
   height: 100%;
-  width: 100%;
-  background-color: black;
   overflow: auto;
-  color: white;
+  width: 100%;
+  background-image: radial-gradient(#ababab 1px, transparent 1px);
+  background-size: 20px 20px;
+  margin-top: 30px; /* Same as the navbar height */
+
 }
 
 /* General Container Styles */
 .container {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
-  min-height: 100vh;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.container horizontal{
-  flex-direction: row
+.container::-webkit-scrollbar {
+  display: none;
 }
 
+.container.horizontal {
+  flex-direction: row;
+}
 
+.container.vertical {
+  flex-direction: column;
+}
+
+* {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Background Styles */
+.bg {
+  flex-direction: column;
+  padding: 2%;
+}
+
+.bg2 {
+
+
+  min-height: 400px;
+
+  min-width: 1000px;
+}
+
+/* Button Styles */
+button {
+  @apply w-full py-3 rounded-lg text-white font-medium focus:outline-none focus:ring transition-all;
+}
+
+button.btn-primary {
+  @apply bg-blue-500 hover:bg-blue-600 focus:ring-blue-300; 
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+button.btn-secondary{
+  @apply hover:bg-blue-600;
+  color: rgb(0, 0, 0);
+  border-width: 1px;
+  border-color: blue;
+}
+button.btn-primary-disabled  {
+  @apply bg-gray-500 hover:bg-gray-600 focus:ring-gray-300;
+}
+
+button.btn-link {
+  @apply bg-transparent text-blue-500 hover:underline focus:outline-none;
+}
+
+/* Card Styles */
 .card {
-  @apply bg-white p-6 rounded-lg shadow-lg w-full max-w-xl text-center;
+  @apply bg-white rounded-lg shadow-lg w-full max-w-xl text-center;
   margin: auto;
+  padding: 2%;
+}
+
+.card.wide {
+  min-width: 800px;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+/* Description Text */
+.description {
+  color: #cccccc;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Features Section */
+.features {
+  max-height: 90%;
+  text-align: center;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  color: black;
+  font-size: 1rem;
+}
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Footer */
+.footer {
+  margin-top: 2%;
+  text-align: center;
+  width: 100%;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.footer-links a {
+  color: #007bff;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* Form Elements */
+form {
+  @apply space-y-4;
+}
+
+input {
+  @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-400;
+  color: black;
+}
+
+input::placeholder {
+  @apply text-gray-400;
+}
+
+textarea{
+  border-color: lightgrey;
+  border-width: 1px;
+  border-radius: 10px;
+  width: 100%;
+  min-height: 200px;
+  padding: 1%;
+}
+
+textarea::placeholder{
+  
+}
+
+
+/* Hero Section */
+.hero {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.hero-subtitle {
+  color: black;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  line-height: 40px;
+}
+
+.hero-title {
+  color: black;
+  font-size: 4.5rem;
+  font-weight: bold;
+  line-height: 100%;
+}
+
+/* Logo or Title Styling */
+.headline {
+  color: black;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Navbar Styles */
+.navbar {
+  @apply shadow-lg;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; 
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.nav-link {
+  color: #007bff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #0056b3;
+}
+
+/* Secondary Text with Link */
+.link {
+  color: #007bff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.secondary-text {
+  color: black;
+  font-size: 0.9rem;
 }
 
 /* Typography */
@@ -62,217 +302,8 @@ a {
   padding: 20px;
 }
 
-/* Logo or Title Styling */
-.title, .headline {
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.title {
-  font-size: 2.5rem;
-}
-
-.headline {
-  font-size: 2.5rem;
-  color: #d4d4d4;
-}
-
-/* Description Text */
-.description {
-  font-size: 1.2rem;
-  color: #cccccc;
-  margin-bottom: 30px;
-  line-height: 1.6;
-}
-
-/* Form Elements */
-form {
-  @apply space-y-4;
-}
-
-input {
-  @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200;
-}
-
-input::placeholder {
-  @apply text-gray-400;
-}
-
-/* Button Styles */
-button {
-  @apply w-full py-3 rounded-lg text-white font-medium focus:outline-none focus:ring transition-all;
-}
-
-button.btn-primary {
-  @apply bg-blue-500 hover:bg-blue-600 focus:ring-blue-300;
-}
-
-button.btn-primary-disabled, button.btn-secondary {
-  @apply bg-gray-500 hover:bg-gray-600 focus:ring-gray-300;
-}
-
-button.btn-link {
-  @apply bg-transparent text-blue-500 hover:underline focus:outline-none;
-}
-
-/* Navbar Styles */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: black;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 1000;
-}
-
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.navbar-links {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-link {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: #0056b3;
-}
-
-/* Hero Section */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.hero-title {
-  font-size: 4.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color:azure;
-}
-
-.hero-subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  color: #cccccc;
-}
-
-.hero-cta {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: #007bff;
-  padding: 12px 24px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-  border: 2px solid #007bff;
-  transition: all 0.3s;
-}
-
-.btn-secondary:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-/* Features Section */
-.features {
-  margin-top: auto;
-  text-align: center;
-}
-
 .section-title {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 30px;
-}
-
-.feature-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.feature-item h3 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.feature-item p {
-  font-size: 1rem;
-  color: #cccccc;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  margin: 10%;
-  background-color: black;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-links {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.footer-links a {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.footer-links a:hover {
-  text-decoration: underline;
-}
-
-/* Secondary Text with Link */
-.secondary-text {
-  font-size: 0.9rem;
-  color: #cccccc;
-}
-
-.link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.link:hover {
-  text-decoration: underline;
 }

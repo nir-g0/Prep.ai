@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Divider from '../../components/divider.tsx'
 
 function SignupPage () {
   const [email, setEmail] = useState('')
@@ -56,7 +57,10 @@ function SignupPage () {
   }, [password, confirm])
 
   return (
-    <div className='container'>
+    <div>
+      <Divider />
+      <Divider />
+      <Divider />
       <div className='card'>
         <h1>Prep.ai</h1>
         <h2>Create an Account</h2>

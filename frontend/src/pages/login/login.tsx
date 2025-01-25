@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
-
-import '../../global.css' // Import your global CSS
+import React, { useState, useEffect } from 'react'
+import Cookies from 'js-cookie'
+import '../../global.css'
 import axios from 'axios'
+import Divider from '../../components/divider.tsx'
 
 function LoginPage () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const setLoginCookie = (token: string) => {
+    Cookies.set('authToken', token, { expires: 2 / 24 })
+    console.log(token)
+  }
+
+  useEffect(() => {
+    const authToken = Cookies.get('authToken')
+    if (authToken) {
+      window.location.href = '/home'
+    }
+  }, [])
 
   const handleLogin = async () => {
     try {
@@ -14,7 +27,8 @@ function LoginPage () {
         email: email,
         password: password
       })
-      if (response.data) {
+      if (response.data[0]) {
+        setLoginCookie(response.data[1])
         window.location.href = '/home'
       }
     } catch (error) {
@@ -24,7 +38,10 @@ function LoginPage () {
   }
 
   return (
-    <div className='container'>
+    <div>
+      <Divider />
+      <Divider />
+      <Divider />
       <div className='card'>
         <h1 className='h1'>Prep.ai</h1>
         <h2 className='h2'>Login</h2>

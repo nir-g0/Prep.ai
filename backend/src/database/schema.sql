@@ -3,13 +3,14 @@ CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     hashed_password TEXT NOT NULL,
+    auth_token TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 --Resumes Table
 CREATE TABLE Resumes (
     id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT NOT NULL UNIQUE,
     dir_hash TEXT NOT NULL UNIQUE,
     uploaded_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(id)

@@ -1,14 +1,17 @@
-const { Client } = require('pg')
+const { Pool } = require('pg')
 const fs = require('fs')
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '.env') })
 
-const client = new Client({
+const client = new Pool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: 'prepai'
+  database: 'prepai',
+  ssl: {
+    rejectUnauthorized: false // Disable strict certificate checking for testing
+  }
 })
 
 client
@@ -23,7 +26,7 @@ client
   .catch(err => {
     console.error('Error connecting or disconnecting:', err.stack)
   })
-  .finally(() => {
+  .finally(async () => {
     console.log('Disconnected from the PostgreSQL database.')
-    return client.end()
+    return await client.end()
   })
