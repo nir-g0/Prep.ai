@@ -32,21 +32,17 @@ function LoginPage () {
         window.location.href = '/home'
       }
     } catch (error) {
-      console.error('Error adding user:', error)
-      alert('An error occurred during signup. Please try again later.')
+      console.error('Error logging user:', error)
+      alert('An error occurred during login. Please try again.')
     }
   }
 
   return (
-    <div>
-      <Divider />
-      <Divider />
-      <Divider />
+    <div className='container'>
       <div className='card'>
         <h1 className='h1'>Prep.ai</h1>
-        <h2 className='h2'>Login</h2>
         <form
-          className='form'
+          className='form container'
           onSubmit={e => {
             e.preventDefault() // Prevent default form submission
             handleLogin() // Call handleSignUp if ready
@@ -70,6 +66,7 @@ function LoginPage () {
             Log In
           </button>
         </form>
+        <Divider />
         <p>
           Don't have an account? <a href='/signup'>Sign Up Here</a>
         </p>

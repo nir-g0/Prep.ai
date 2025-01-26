@@ -194,6 +194,7 @@ const DeleteSession = async (id, title) => {
 
 const GetSession = async (id, token) => {
   const client = await pool.connect()
+
   try {
     const user_id = await GetUserByToken(token)
     const response2 = await client.query(

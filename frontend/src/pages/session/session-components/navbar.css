@@ -1,4 +1,13 @@
 .navbar-title {
-    color: black;
+    color: white;
 
   }
+
+  .job-info {
+    font-size: 1rem;
+    color: #ffffff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  

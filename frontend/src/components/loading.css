@@ -5,7 +5,7 @@
     border-radius: 50%;
     position: relative;
     animation: rotate 1s linear infinite;
-    margin-top: 25%;
+    /* margin-top: 25%; */
   
   }
   .loader::before , .loader::after {
@@ -14,7 +14,7 @@
     position: absolute;
     inset: 0px;
     border-radius: 50%;
-    border: 10px solid #000000;
+    border: 10px solid #ffffff;
     animation: prixClipFix 3.5s linear infinite ;
   }
   .loader::after{

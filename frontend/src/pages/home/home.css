@@ -1,24 +1,21 @@
 .layout {
   display: flex;
-  height: calc(100vh - 60px); /* Subtract navbar height */
-
+  height: calc(100vh - 10vh); /* Subtract navbar height */
 }
 
 .vertical-column {
-  width: 15%;
+  width: 12%;
+  height: calc(100vh - 9.75vh);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  padding-bottom: 10rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: white;
-  border-color: rgb(194, 194, 194);
-  border-right-width: .5px;
+  background-image: radial-gradient(circle at center, #263349, #18212f 70%);
   position: fixed;
   top: 0;
-  bottom: 0
+  bottom: 0;
 }
 
 .btn-primary {
@@ -33,16 +30,27 @@
 
 
 .main-content {
-  width: 90%;
-  padding: 2rem;
-  margin-left: 15%;
+  width: 100%;
+  padding: 3rem;
+  margin-left: 12%;
+  margin-top: 3%;
 }
 
 .card {
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
+  margin-top: 2rem;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: scroll;
+}
+
+.main-content-card {
+    min-width: 95%;
 }
 
 .card-item {
@@ -50,18 +58,23 @@
   justify-content: space-between; /* Aligns title, date, and buttons horizontally */
   align-items: center; /* Ensures vertical alignment */
   padding: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid #007cf0;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: rgb(24, 24, 24);
+  min-width: 100%;
+  margin: 1px;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin: 0; /* Removes any default margin around the title */
+  flex: 1; /* Allows the title to take up available space */
+  text-align: left; /* Aligns the title to the left */
+  margin-right: 1rem; /* Adds space between the title and the date/buttons */
 }
 
 .card-date {
+  flex: 1;
   font-size: 0.9rem;
   color: #666;
 }

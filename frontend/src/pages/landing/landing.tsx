@@ -15,41 +15,24 @@ function LandingPage () {
           </a>
         </div>
       </nav>
-      <div className='container vertical'>
-        <Divider />
-        <Divider />
-
-        <div id='features' className='card wide'>
+      <div className='container'>
+        <div id='features' className='card'>
           <h1 className='hero-title'>Prep.ai [ALPHA]</h1>
           <Divider />
-          <div className='feature-list'>
-            <p className='hero-subtitle'>
-              Tailored feedback, progress tracking and dynamic mock interviews.
-            </p>
-            <div className='feature-item'>
-              <h3>Mock Interviews</h3>
-              <p>
-                Choose role, difficulty, and practice with real-time feedback.
-              </p>
-            </div>
-            <div className='feature-item'>
-              <h3>Realtime Feedback</h3>
-              <p>Personalized insights for text and verbal responses.</p>
-            </div>
-            <div className='feature-item'>
-              <h3>Progress Dashboard</h3>
-              <p>Track your progress with detailed analytics.</p>
-            </div>
-          </div>
+          <p className='card-title center-text'>
+            Revolutionize interview prep with AI-driven questions, personalized
+            feedback, and dynamic progress tracking.
+          </p>
           <Divider />
 
+          <button
+            className='btn-primary'
+            onClick={() => (window.location.href = '/signup')}
+          >
+            Get Started
+          </button>
+          <Divider />
           <div>
-            <button
-              className='btn-primary'
-              onClick={() => (window.location.href = '/signup')}
-            >
-              Get Started
-            </button>
             <p className='secondary-text'>
               Already have an account?{' '}
               <a href='/login' className='link'>
@@ -58,7 +41,7 @@ function LandingPage () {
             </p>
           </div>
         </div>
-        <footer className='footer'>
+        <footer className='card'>
           <p>© 2025 Prep.ai. All rights reserved.</p>
           <div className='footer-links'>
             <a href='/privacy'>Privacy Policy</a>

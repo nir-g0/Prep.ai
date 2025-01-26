@@ -27,7 +27,7 @@ const generateQuestions = async query_data => {
       `You are a job interviewer. The candidate is applying for a ${query_data['position']} role at ${query_data['company']}. ` +
       `The position requires the following skills: ${query_data['position_skills']}. ` +
       `The candidate has the following skills: ${query_data['application_skills']}. ` +
-      `Please generate exactly 7 unique interview questions tailored to this candidate. ` +
+      `Please generate exactly 12 unique and in depth interview questions tailored to this candidate. ` +
       `Make sure the questions are specific, relevant, and appropriate for the role's level.` +
       `Return the questions as an array of strings. Do not include any additional text.`
 
@@ -64,8 +64,11 @@ const generateFeedback = async (response, question) => {
       `You are a job interviewer. The candidate is responding to a questino you gave him. ` +
       `The question you asked was ${question}.` +
       `You are a nice interviewer, so you are going to provide honest but harsh feedback to the candidate based on their response` +
-      `talk about what they could add, what they can remove, what filler words they used, etc. Respond in a paragraph,
-      make youre response clear and easy to understand`
+      `talk about what they did well, what they could add, what they can remove, what filler words they used, etc. Respond in a paragraph,
+      make youre response clear and easy to understand. Include a summary 'list' of what the candidate should do to learn. Here is an
+      example of a part of a summary component: '1. Specify whether you used PyTorch or TensorFlow and why you chose it for your project.' 
+      Keep in mind the responseis obtained from a speech to text model, which can sometimes be innacurate in its spelling. 
+      If the response is too short, give ideas for what they could talk about.`
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',

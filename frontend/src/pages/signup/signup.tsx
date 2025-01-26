@@ -57,15 +57,12 @@ function SignupPage () {
   }, [password, confirm])
 
   return (
-    <div>
-      <Divider />
-      <Divider />
-      <Divider />
+    <div className='container'>
       <div className='card'>
         <h1>Prep.ai</h1>
         <h2>Create an Account</h2>
         <form
-          className='form'
+          className='form container'
           onSubmit={e => {
             e.preventDefault() // Prevent default form submission
             if (ready) {
@@ -103,6 +100,7 @@ function SignupPage () {
             Sign Up
           </button>
         </form>
+        <Divider />
         <div>
           <p className='p'>
             Already have an account?

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './session.css' // Assuming you have a CSS file for styles
+import './session.css'
 import '../../global.css'
 import Cookies from 'js-cookie'
 import SessionNavbar from './session-components/navbar.tsx'
@@ -9,6 +9,7 @@ import SpeechRecognition, {
 } from 'react-speech-recognition'
 
 import axios from 'axios'
+import Divider from '../../components/divider.tsx'
 
 const SessionPage = () => {
   const [questionCount, setQuestionCount] = useState(0)
@@ -19,7 +20,7 @@ const SessionPage = () => {
   const [loading, setLoading] = useState(false)
   const [sessionData, setSessionData] = useState(null)
   const [questionsList, setQuestionsList] = useState([])
-  const totalQuestions = 7
+  const totalQuestions = 12
   const [text, setText] = useState('')
   const [listeningTimer, setListeningTimer] = useState(null) // Timer state
 
@@ -36,6 +37,7 @@ const SessionPage = () => {
 
   // Fetch session data from backend
   useEffect(() => {
+    console.log('fetching')
     const fetchSessionData = async () => {
       try {
         const link = window.location.href.split('/')
@@ -109,26 +111,28 @@ const SessionPage = () => {
     const timer = setTimeout(() => {
       SpeechRecognition.stopListening()
       console.log('Stopped listening after 2 minutes')
+      handleGenerateFeedback()
     }, 120000) // 2 minutes in milliseconds
     setListeningTimer(timer) // Save timer reference
   }
 
   // Stop listening manually and clear the timer
   const handleGenerateFeedback = async () => {
+    setLoading(true)
     SpeechRecognition.stopListening()
     if (listeningTimer) clearTimeout(listeningTimer) // Clear the timer
     const response = await axios.post('http://localhost:3000/gen-feedback', {
       transcript: text,
       question: questionsList[questionCount]
     })
-    console.log(response.data)
     setFeedback(response.data)
+    setLoading(false)
     setIsFeedbackVisible(true)
   }
 
-  const handleNextQuestion = () => {
-    if (questionCount < totalQuestions) {
-      setQuestionCount(questionCount + 1)
+  const handleNextQuestion = input => {
+    if (questionCount < totalQuestions - 1) {
+      setQuestionCount(questionCount + input)
       setFeedback('')
       setIsFeedbackVisible(false)
     } else {
@@ -150,10 +154,11 @@ const SessionPage = () => {
           )}
           <div className='container'>
             {!isFinalScoreVisible ? (
-              <div className='session-content'>
+              <div className='container'>
                 <div className='card'>
                   <div className='title'>
-                    Question {questionCount + 1}: {questionsList[questionCount]}
+                    <b>Question {questionCount + 1}</b>:{' '}
+                    {questionsList[questionCount]}
                   </div>
                   {isFeedbackVisible ? (
                     <>
@@ -165,18 +170,26 @@ const SessionPage = () => {
                   ) : (
                     <>
                       {listening ? (
-                        <button
-                          className='microphone-button-red'
-                          onClick={handleGenerateFeedback}
-                        >
-                          🎤
-                        </button>
+                        <>
+                          <button
+                            className='microphone-button-red'
+                            onClick={handleGenerateFeedback}
+                          >
+                            <img
+                              src={require('./session-components/images/microphone-2.png')}
+                              alt='Speak'
+                            />
+                          </button>
+                        </> // Adjust the src and alt as necessary
                       ) : (
                         <button
                           className='microphone-button'
                           onClick={beginListening}
                         >
-                          🎤
+                          <img
+                            src={require('./session-components/images/microphone-2.png')}
+                            alt='Speak'
+                          />
                         </button>
                       )}
                       <div className='container vertical'>
@@ -187,38 +200,67 @@ const SessionPage = () => {
                   )}
                 </div>
 
-                {isFeedbackVisible && (
+                {isFeedbackVisible ? (
                   <div className='feedback'>
                     <strong>Feedback:</strong>
-                    <p>{feedback}</p>
+                    <Divider />
+                    <p className='feedback-description'>{feedback}</p>
+                    <Divider />
+                  </div>
+                ) : (
+                  <div className='container'>
+                    <button
+                      className='btn-primary'
+                      onClick={() => {
+                        SpeechRecognition.stopListening()
+                        resetTranscript()
+                        setText(transcript)
+                        handleNextQuestion(1)
+                      }}
+                    >
+                      Skip
+                    </button>
+                    {questionCount > 0 && (
+                      <button
+                        className='btn-primary'
+                        onClick={() => {
+                          if (questionCount > 0) {
+                            SpeechRecognition.stopListening()
+                            resetTranscript()
+                            setText(transcript)
+                            handleNextQuestion(-1)
+                          }
+                        }}
+                      >
+                        Back
+                      </button>
+                    )}
                   </div>
                 )}
-                <div className='container-small'>
-                  <button
-                    className='btn-primary'
-                    onClick={() => {
-                      SpeechRecognition.stopListening()
-                      resetTranscript()
-                      setText(transcript)
-                      setQuestionCount(questionCount + 1)
-                    }}
-                  >
-                    Skip
-                  </button>
-                </div>
               </div>
             ) : (
               <div className='container'>
-                <div className='session-content'>
-                  <div className='card final-score'>Your final score: 85%</div>
+                <div className='card'>
+                  All done!
+                  <button
+                    onClick={() => {
+                      window.location.href = '/home'
+                    }}
+                    className='btn-primary'
+                  >
+                    Back To Home
+                  </button>
                 </div>
               </div>
             )}
           </div>
 
           {!isFinalScoreVisible && isFeedbackVisible && (
-            <div className='next-arrow' onClick={handleNextQuestion}>
-              ➡️
+            <div className='next-arrow' onClick={() => handleNextQuestion(1)}>
+              <img
+                src={require('./session-components/images/next.png')}
+                alt='Next'
+              />
             </div>
           )}
         </>
@@ -230,3 +272,4 @@ const SessionPage = () => {
 }
 
 export default SessionPage
+//<div> Icons made by <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div>
