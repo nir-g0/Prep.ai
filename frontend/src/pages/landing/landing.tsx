@@ -5,7 +5,7 @@ function LandingPage () {
   return (
     <>
       <nav className='navbar'>
-        <div className='navbar-logo'>Prep.ai [ALPHA]</div>
+        <div className='navbar-logo'>Prep.ai</div>
         <div className='navbar-links'>
           <a href='/signup' className='nav-link'>
             Sign Up

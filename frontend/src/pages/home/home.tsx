@@ -6,6 +6,54 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import LoadingComponent from '../../components/loading.tsx'
 
+/**
+ * HomePage component that displays the user's sessions and provides options to create a new session,
+ * view profile, and log out. It checks for authorization using a cookie and fetches session data from the server.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * <HomePage />
+ *
+ * @remarks
+ * - Redirects to the home page if the user is not authorized.
+ * - Displays a loading component while fetching session data.
+ * - Provides options to start or delete a session.
+ *
+ * @function
+ * @name HomePage
+ *
+ * @hook
+ * @name useState
+ * @description Manages the state for authorization, sessions, and loading status.
+ *
+ * @hook
+ * @name useEffect
+ * @description Fetches session data from the server when the component mounts.
+ *
+ * @hook
+ * @name useNavigate
+ * @description Provides navigation functionality.
+ *
+ * @param {boolean} authorized - Indicates if the user is authorized.
+ * @param {Function} setAuthorized - Updates the authorization state.
+ * @param {Array} sessions - List of user sessions.
+ * @param {Function} setSessions - Updates the sessions state.
+ * @param {boolean} loading - Indicates if the session data is being loaded.
+ * @param {Function} setLoading - Updates the loading state.
+ * @param {Function} navigate - Function to navigate to different routes.
+ *
+ * @function
+ * @name handleLogOut
+ * @description Logs out the user by removing the authorization cookie and redirecting to the home page.
+ *
+ * @function
+ * @name handleDelete
+ * @description Deletes a session by sending a request to the server and updating the sessions state.
+ * @param {string} id - The ID of the session to delete.
+ * @param {string} title - The title of the session to delete.
+ */
 const HomePage = () => {
   const [authorized, setAuthorized] = useState(false)
   const [sessions, setSessions] = useState([])

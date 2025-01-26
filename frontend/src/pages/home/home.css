@@ -58,13 +58,14 @@
   justify-content: space-between; /* Aligns title, date, and buttons horizontally */
   align-items: center; /* Ensures vertical alignment */
   padding: 1rem;
-  border: 1px solid #007cf0;
   border-radius: 5px;
   background-color: rgb(24, 24, 24);
   min-width: 100%;
-  margin: 1px;
+  margin: 2px;
   text-align: center;
   word-wrap: break-word;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
 }
 
 .card-title {

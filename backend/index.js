@@ -1,12 +1,62 @@
 const express = require('express') // Import express
 const multer = require('multer')
-const { parseResume: parseResume } = require('./src/routes/parser')
+const { parseResume } = require('./src/routes/parser')
+/**
+ * Module dependencies.
+ * @module backend/index
+ * @requires ./src/database/auth.js
+ */
+
+/**
+ * Adds a new user to the database.
+ * @function AddUser
+ */
+
+/**
+ * Authenticates a user.
+ * @function AuthUser
+ */
+
+/**
+ * Deletes a user from the database.
+ * @function DelUser
+ */
+
+/**
+ * Attaches a resume to a user profile.
+ * @function AttachResume
+ */
+
+/**
+ * Creates a new session.
+ * @function CreateSession
+ */
+
+/**
+ * Retrieves all sessions.
+ * @function GetSessions
+ */
+
+/**
+ * Retrieves a specific session by ID.
+ * @function GetSession
+ */
+
+/**
+ * Deletes a session by ID.
+ * @function DeleteSession
+ */
+
+/**
+ * Updates a session by ID.
+ * @function UpdateSession
+ */
 const {
-  AddUser: AddUser,
-  AuthUser: AuthUser,
-  DelUser: DelUser,
-  AttachResume: AttachResume,
-  CreateSession: CreateSession,
+  AddUser,
+  AuthUser,
+  DelUser,
+  AttachResume,
+  CreateSession,
   GetSessions,
   GetSession,
   DeleteSession,
@@ -14,7 +64,7 @@ const {
 } = require('./src/database/auth.js')
 
 const {
-  generateQuestions: generateQuestions,
+  generateQuestions,
   generateFeedback: generateFeedback
 } = require('./src/routes/llm.js')
 
@@ -30,7 +80,7 @@ app.use(
 )
 app.use(express.json())
 
-let user = { length: 0, users: {} }
+const user = { length: 0, users: {} }
 
 app.get('/', (req, res) => {
   const { name } = req.query // Extract "name" from the query parameters
@@ -55,6 +105,7 @@ app.post('/add-user', async (req, res) => {
     res.send(response)
   } catch (error) {
     console.error('Error:', error.response?.data || error.message)
+    res.status(500).send(error.message)
   }
 })
 
@@ -62,9 +113,9 @@ app.post('/auth-user', async (req, res) => {
   try {
     const { email, password } = req.body
     const response = await AuthUser(email, password)
-    res.send(response)
   } catch (error) {
     console.error('Error:', error.response?.data || error.message)
+    res.status(500).send(error.message)
   }
 })
 
@@ -125,11 +176,8 @@ app.post('/create-session', async (req, res) => {
     const { cookie, data } = req.body
     const response = await CreateSession(cookie, data)
     res.send(response.data)
-  } catch (error) {
-    console.error('Error:', error.response?.data || error.message)
-  }
+  } catch (error) {}
 })
-
 app.get('/get-sessions', async (req, res) => {
   try {
     const cookie = req.headers.authorization
@@ -137,6 +185,7 @@ app.get('/get-sessions', async (req, res) => {
     res.json(response)
   } catch (error) {
     console.error('Error:', error.response?.data || error.message)
+    res.status(500).send(error.message)
   }
 })
 
@@ -149,7 +198,6 @@ app.post('/delete-session', async (req, res) => {
     console.error('Error:', error.response?.data || error.message)
   }
 })
-
 app.get('/get-session', async (req, res) => {
   try {
     const { id, authToken } = req.query
@@ -157,18 +205,18 @@ app.get('/get-session', async (req, res) => {
     res.send(response)
   } catch (error) {
     console.error('Error: ', error)
+    res.status(500).send(error.message)
   }
 })
-
 app.post('/gen-qs', async (req, res) => {
   try {
     const { sessionId, query_data, column } = req.body
     const response = await generateQuestions(query_data)
     await UpdateSession(sessionId, column, response)
-    console.log(response)
     res.send(response)
   } catch (error) {
     console.error('Error: ', error)
+    res.status(500).send(error.message)
   }
 })
 

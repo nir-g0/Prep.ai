@@ -104,6 +104,14 @@ const AuthenticateUser = async (email, password) => {
   }
 }
 
+/**
+ * Attaches a resume to a user by updating the database with the provided hash.
+ * If a resume already exists for the user, it updates the existing entry.
+ *
+ * @param {string} cookies - The authentication token of the user.
+ * @param {string} hash - The hash of the resume directory to be attached.
+ * @returns {Promise<[boolean, string|null]>} - A promise that resolves to an array where the first element is a boolean indicating success, and the second element is the previous resume directory hash if it existed, otherwise null.
+ */
 const AttachResume = async (cookies, hash) => {
   const client = await pool.connect()
   try {
