@@ -2,38 +2,97 @@
     "skills" : [
         "Python", "Java", "JavaScript", "C", "C++", "C#", "Ruby", "PHP", "Swift", "Kotlin", 
         "R", "Go (Golang)", "TypeScript", "Scala", "Perl", "Rust", "Dart", "MATLAB", 
-        "Bash", "Shell Scripting",
-            "HTML", "CSS", "React.js", "Angular", "Vue.js", "Node.js", "Express.js", "Django", 
+        "Bash", "Shell Scripting", "Haskell", "Julia", "COBOL", "Fortran",
+        
+
+        "HTML", "CSS", "React.js", "Angular", "Vue.js", "Node.js", "Express.js", "Django", 
         "Flask", "Spring Boot", "Ruby on Rails", "ASP.NET", "jQuery", "Next.js", "Nuxt.js",
-            "SQL", "NoSQL", "PostgreSQL", "MySQL", "MongoDB", "Redis", "DynamoDB", 
+        "TailwindCSS", "Bootstrap", "Material-UI", "Sass", "Less", "Chakra UI", "Storybook",
+
+
+        "FastAPI", "NestJS", "Sails.js", "Strapi", "LoopBack", "Meteor.js",
+        "GraphQL", "Apollo", "gRPC", "Hapi.js", "Feather.js",
+        
+
+        "SQL", "NoSQL", "PostgreSQL", "MySQL", "MongoDB", "Redis", "DynamoDB", 
         "Cassandra", "Elasticsearch", "Firebase Realtime Database", "SQLite", 
-        "Oracle Database", "GraphQL", "Neo4j",
-            "Git", "GitHub", "GitLab", "Bitbucket", "Docker", "Kubernetes", "Jenkins", 
+        "Oracle Database", "MariaDB", "Snowflake", "CockroachDB", "TimescaleDB",
+        "Neo4j", "Amazon Redshift", "BigQuery", "Apache Hive", "HBase", 
+        
+
+        "Git", "GitHub", "GitLab", "Bitbucket", "SVN", "Mercurial",
+        "Docker", "Kubernetes", "Podman", "OpenShift", "Jenkins", 
         "Maven", "Gradle", "Webpack", "Babel", "Terraform", "Ansible", "Vagrant",
-            "AWS", "Microsoft Azure", "Google Cloud Platform (GCP)", "Heroku", "Netlify", 
+        
+
+        "AWS", "Microsoft Azure", "Google Cloud Platform (GCP)", "Heroku", "Netlify", 
         "DigitalOcean", "IBM Cloud", "Cloudflare", "AWS Lambda", "Firebase Functions",
-            "Linux", "Windows", "macOS", "Ubuntu", "Red Hat Enterprise Linux", "CentOS", 
-        "Debian",
-            "TensorFlow", "PyTorch", "Scikit-learn", "Keras", "Pandas", "NumPy", 
+        "CloudFormation", "Pulumi", "Elastic Beanstalk", "Azure DevOps",
+        
+
+        "Linux", "Windows", "macOS", "Ubuntu", "Red Hat Enterprise Linux", "CentOS", 
+        "Debian", "Arch Linux", "Fedora", "FreeBSD", "Solaris",
+        
+
+        "TensorFlow", "PyTorch", "Scikit-learn", "Keras", "Pandas", "NumPy", 
         "Matplotlib", "Seaborn", "OpenCV", "Natural Language Processing (NLP)", 
         "SpaCy", "NLTK", "XGBoost", "LightGBM", "Hugging Face Transformers",
-        "CI/CD Pipelines", "Jenkins", "Travis CI", "CircleCI", "GitHub Actions", 
-        "Prometheus", "Grafana", "Nagios", "Puppet", "Selenium",
+        "Apache Spark", "Dask", "DataBricks", "MLFlow", "RapidMiner", "H2O.ai",
+        "BigML", "Orange3",
+        
+
+        "Prometheus", "Grafana", "Nagios", "Splunk", "New Relic", "Datadog", "Zabbix",
+        "OpenTelemetry", "ELK Stack (Elasticsearch, Logstash, Kibana)",
+        
+
         "JUnit", "TestNG", "Mocha", "Jest", "Cypress", "Selenium WebDriver", "Pytest", 
-        "Postman", "SoapUI", "Appium", "JMeter",
-        "Project Management", "Agile", "Scrum", "Kanban", "Waterfall", "Motivated", "Determined", "Communication",
-        "Strategic Planning", "Business Analysis", "Stakeholder Communication", 
-        "Team Leadership", "Problem Solving", "Critical Thinking", "Time Management",
-        "Decision Making", "Emotional Intelligence", "Collaboration", "Negotiation",
-        "Interpersonal Skills", "Public Speaking", "Presentation Skills", "Writing Skills",
-        "Customer Relationship Management", "CRM", "Conflict Resolution", "Adaptability",
-        "Cross-Functional Collaboration", "Market Research", "Product Management",
-            "Financial Analysis", "Budgeting", "Forecasting", "Risk Management",
-        "Cost-Benefit Analysis", "Profit and Loss Management", "P&L Management",
-        "Data-Driven Decision Making", "ROI Analysis", "KPI Tracking",
-        "Business Intelligence", "Salesforce", "Tableau", "Power BI",
-            "Content Strategy", "SEO", "Social Media Management", "Email Marketing",
-        "Copywriting", "Digital Marketing", "Market Segmentation", "Campaign Management",
-        "Brand Management", "Public Relations", "Customer Retention", "Client Engagement"
+        "Postman", "SoapUI", "Appium", "JMeter", "Katalon Studio", "Robot Framework",
+        "Playwright", "BrowserStack", "Sauce Labs",
+        
+
+        "Nginx", "Apache HTTP Server", "HAProxy", "Load Balancing", "Firewall Management",
+        "Wireshark", "OpenVPN", "WireGuard", "IPTables", "OAuth2", "JWT",
+        "Penetration Testing", "Burp Suite", "OWASP ZAP", "Metasploit", "Snort",
+        "SSL/TLS", "Cryptography", "IAM (Identity and Access Management)", 
+        "SOC2 Compliance", "GDPR Compliance",
+        
+
+        "Arduino", "Raspberry Pi", "ESP32", "IoT Protocols (MQTT, CoAP)", "LoRaWAN",
+        "FPGA Programming", "Verilog", "VHDL", "Embedded Systems Design", 
+        "PCB Design", "Cadence OrCAD", "Altium Designer",
+        
+
+        "Unity", "Unreal Engine", "Godot", "Blender", "OpenGL", "Vulkan", "DirectX",
+        "CryEngine", "GameMaker", "Cocos2d",
+        
+
+        "Solidity", "Ethereum", "Hyperledger", "Truffle", "Web3.js", "Ethers.js",
+        "Smart Contracts", "DApps", "IPFS", "Polygon", "Binance Smart Chain (BSC)",
+        "NFT Development", "Zero Knowledge Proofs",
+        
+
+        "ROS (Robot Operating System)", "Gazebo", "V-REP", "Robot Modeling", "SLAM",
+        "LIDAR Processing", "Path Planning Algorithms", 
+        
+
+        "Financial Modeling", "Monte Carlo Simulation", "Data Visualization",
+        "ETL Pipelines", "SQL Analytics", "Excel Advanced Functions", "Power Query",
+        "Statistical Analysis", "Market Basket Analysis", 
+        
+
+        "Team Leadership", "Cross-Functional Collaboration", "Conflict Resolution",
+        "Strategic Thinking", "Change Management", "Process Optimization",
+        "Workshop Facilitation", "Stakeholder Management", "Mentorship",
+        "Empathy", "Cultural Intelligence", "Adaptability", "Persuasion",
+        
+
+        "Figma", "Sketch", "Adobe XD", "Adobe Creative Suite", 
+        "User Research", "Wireframing", "Prototyping", "A/B Testing", 
+        "Accessibility Design (WCAG)", "Design Thinking", "Responsive Design",
+        
+
+        "Regular Expressions (Regex)", "Cron Jobs", "ETL Design", 
+        "Image Processing", "Video Streaming Protocols (RTMP, HLS)",
+        "Hardware Debugging Tools", "Simulation Software", "3D Modeling"
     ]
 }

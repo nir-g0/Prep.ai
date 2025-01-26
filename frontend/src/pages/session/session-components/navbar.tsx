@@ -5,7 +5,7 @@ import './navbar.css'
 const SessionNavbar = ({ jobTitle = 'Job Title | Company Name', id = -1 }) => {
   return (
     <div className='navbar'>
-      <div className='navbar-logo'>Prep.ai [ALPHA]</div>
+      <div className='navbar-logo'>Prep.ai</div>
       <div className='job-info'>{jobTitle}</div>
       <button
         onClick={() => {

@@ -39,7 +39,7 @@ function LoginPage () {
 
   return (
     <div className='container'>
-      <div className='card'>
+      <div className='card sm'>
         <h1 className='h1'>Prep.ai</h1>
         <form
           className='form container'

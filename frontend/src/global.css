@@ -91,6 +91,11 @@ button.btn-primary-disabled{
   min-width: 60%;
 }
 
+.sm {
+  max-width: 40%;
+  min-width: 40%;
+}
+
 .card:hover {
   @apply shadow-lg transform scale-105;
 }

@@ -17,7 +17,7 @@ function LandingPage () {
       </nav>
       <div className='container'>
         <div id='features' className='card'>
-          <h1 className='hero-title'>Prep.ai [ALPHA]</h1>
+          <h1 className='hero-title'>Prep.ai</h1>
           <Divider />
           <p className='card-title center-text'>
             Revolutionize interview prep with AI-driven questions, personalized

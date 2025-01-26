@@ -75,7 +75,7 @@ const HomePage = () => {
   return authorized ? (
     <>
       <nav className='navbar'>
-        <div className='navbar-logo'>Prep.ai [ALPHA]</div>
+        <div className='navbar-logo'>Prep.ai</div>
         <div className='navbar-links'>
           <a href='/profile' className='nav-link'>
             Profile

@@ -11,7 +11,9 @@ const pool = new Pool({
   database: 'prepai',
   ssl: {
     rejectUnauthorized: false // Disable strict certificate checking for testing
-  }
+  },
+  idleTimeoutMillis: 30000, // Time a connection can be idle before being closed
+  connectionTimeoutMillis: 2000
 })
 
 const CreateHash = async password => {
