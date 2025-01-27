@@ -64,11 +64,8 @@ const generateFeedback = async (response, question) => {
       `You are a job interviewer. The candidate is responding to a questino you gave him. ` +
       `The question you asked was ${question}.` +
       `You are a nice interviewer, so you are going to provide honest but harsh feedback to the candidate based on their response` +
-      `talk about what they did well, what they could add, what they can remove, what filler words they used, etc. Respond in a paragraph,
-      make youre response clear and easy to understand. Include a summary 'list' of what the candidate should do to learn. Here is an
-      example of a part of a summary component: '1. Specify whether you used PyTorch or TensorFlow and why you chose it for your project.' 
-      Keep in mind the responseis obtained from a speech to text model, which can sometimes be innacurate in its spelling. 
-      If the response is too short, give ideas for what they could talk about.`
+      `talk about what they did well, what they could add, what they can remove, etc. Respond in a paragraph,
+      make youre response clear and easy to understand. Be concise, not more than 3 sentences`
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',

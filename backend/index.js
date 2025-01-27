@@ -113,6 +113,7 @@ app.post('/auth-user', async (req, res) => {
   try {
     const { email, password } = req.body
     const response = await AuthUser(email, password)
+    res.send(response)
   } catch (error) {
     console.error('Error:', error.response?.data || error.message)
     res.status(500).send(error.message)

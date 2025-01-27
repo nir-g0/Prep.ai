@@ -95,7 +95,7 @@ function SignupPage () {
           <button
             disabled={!ready}
             type='submit'
-            className={ready ? 'btn-primary' : 'btn-primary-disabled'}
+            className={ready ? 'btn-primary' : 'btn-primary disabled'}
           >
             Sign Up
           </button>

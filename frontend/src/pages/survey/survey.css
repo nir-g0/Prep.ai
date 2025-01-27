@@ -6,3 +6,7 @@
   textarea {
     max-height: 10em;
   }
+
+  .toggle-buttons {
+    flex-direction: row;
+  }

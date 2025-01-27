@@ -11,6 +11,10 @@ const SurveyPage = () => {
   const [application, setApplication] = useState('')
   const [resume, setResume] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
+  const [activeButton, setActiveButton] = useState<'technical' | 'general'>(
+    'technical'
+  )
+
   useEffect(() => {
     const authToken = Cookies.get('authToken')
     if (!authToken) {
@@ -63,7 +67,8 @@ const SurveyPage = () => {
           title,
           company,
           position_requirements: applicationResponse.data,
-          users_skills: parsed_resume
+          users_skills: parsed_resume,
+          interview_type: activeButton
         }
         const final = await axios.post('http://localhost:3000/create-session', {
           cookie: authToken,
@@ -85,6 +90,10 @@ const SurveyPage = () => {
     if (e.target.files) {
       setResume(e.target.files[0])
     }
+  }
+
+  const handleButtonToggle = (button: 'technical' | 'general') => {
+    setActiveButton(button)
   }
 
   return loading ? (
@@ -124,6 +133,31 @@ const SurveyPage = () => {
               onChange={e => setApplication(e.target.value)}
               required
             />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='questions-type'>Questions-type</label>
+            <div className='toggle-buttons align-middle'>
+              <button
+                className={`btn ${
+                  activeButton === 'technical'
+                    ? 'btn-primary'
+                    : 'btn-primary disabled'
+                }`}
+                onClick={() => handleButtonToggle('technical')}
+              >
+                Technical
+              </button>
+              <button
+                className={`btn ${
+                  activeButton === 'general'
+                    ? 'btn-primary'
+                    : 'btn-primary disabled'
+                }`}
+                onClick={() => handleButtonToggle('general')}
+              >
+                General
+              </button>
+            </div>
           </div>
           <div className='form-group'>
             <label htmlFor='resume'>Resume (PDF)</label>

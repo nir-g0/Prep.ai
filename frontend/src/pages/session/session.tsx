@@ -78,7 +78,8 @@ const SessionPage = () => {
           applicant_skills: [
             ...session_data['users_skills']['data']['projects'],
             ...session_data['users_skills']['data']['skills']
-          ]
+          ],
+          interview_type: sessionData['session_data']['interview_type']
         }
 
         const link = window.location.href.split('/')
@@ -108,12 +109,6 @@ const SessionPage = () => {
   // Start listening and set the 2-minute timer
   const beginListening = () => {
     SpeechRecognition.startListening({ continuous: true })
-    const timer = setTimeout(() => {
-      SpeechRecognition.stopListening()
-      console.log('Stopped listening after 2 minutes')
-      handleGenerateFeedback()
-    }, 120000) // 2 minutes in milliseconds
-    setListeningTimer(timer) // Save timer reference
   }
 
   // Stop listening manually and clear the timer
